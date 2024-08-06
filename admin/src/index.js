@@ -20,6 +20,8 @@ import EditPdf from './screens/EditPdf.jsx'
 import AddOns from './screens/AddOns.jsx';
 import EditOrg from './components/AddOns/EditOrg.jsx';
 import AddOrg from './components/AddOns/AddOrg.jsx';
+import AddService from './components/AddOns/AddService.jsx';
+import EditService from './components/AddOns/EditService.jsx';
 
 const router = createBrowserRouter([
   {
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
   {
     path: '/add-org',
     element: <AddOrg />
+  },
+  {
+    path: '/add-service',
+    element: <AddService />  
+  },
+  {
+    path: '/edit-service/:id',
+    element: <EditService />
   }
 ])
 

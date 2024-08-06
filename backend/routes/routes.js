@@ -10,7 +10,8 @@ const {
     createGSBlog,
     createGSVideo,
     createGSPdf,
-    createGSSocialOrg
+    createGSSocialOrg,
+    createGSSocialService
 } = require("../controllers/create.js")
 const {
     updateBlog,
@@ -20,7 +21,8 @@ const {
     updateGSBlog,
     updateGSVideo,
     updateGSPdf,
-    updateGSSocialOrg
+    updateGSSocialOrg,
+    updateGSSocialService
 } = require("../controllers/update.js")
 const {
     deleteBlog,
@@ -30,7 +32,8 @@ const {
     deleteGSBlog,
     deleteGSVideo,
     deleteGSPdf,
-    deleteGSSocialOrg
+    deleteGSSocialOrg,
+    deleteGSSocialService
 } = require("../controllers/delete.js")
 const {
     getBlog,
@@ -55,7 +58,9 @@ const {
     getGSBlogCardsByPages,
     getAllGSPdfsTitle,
     getAllGSSocialOrgsName,
-    getGSSocialOrg
+    getGSSocialOrg,
+    getAllGSSocialSrviceName,
+    getGSSocialService
 } = require('../controllers/fetch.js')
 
 const {
@@ -116,6 +121,13 @@ routes
     .delete('/delete-gs-social-org', deleteGSSocialOrg)
     .get('/get-all-gs-social-orgs-name', getAllGSSocialOrgsName)
     .post('/get-gs-social-org', getGSSocialOrg)
+
+    // Social Services Routes
+    .post('/create-gs-social-service', createGSSocialService)
+    .put('/update-gs-social-service', updateGSSocialService)
+    .delete('/delete-gs-social-service', deleteGSSocialService)
+    .get('/get-all-gs-social-services-name', getAllGSSocialSrviceName)
+    .post('/get-gs-social-service', getGSSocialService)
 
 
 module.exports = routes;

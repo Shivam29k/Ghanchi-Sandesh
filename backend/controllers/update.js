@@ -6,6 +6,7 @@ const GSArticles = require('../models/gs/GSArticle.js')
 const GSVideos = require('../models/gs/GSVideos.js');
 const GSPdfs = require('../models/gs/GSPdfs.js');
 const GSSocialOrg = require("../models/gs/GSSocialOrg.js");
+const GSSocialService = require("../models/gs/GSSocialService.js");
 
 
 const updateBlog = async (req, res) => {
@@ -140,6 +141,21 @@ const updateGSSocialOrg = async (req, res) => {
     }
 }
 
-module.exports = { updateBlog, updateArticle, updateVideo, updateGSArticle, updateGSBlog, updateGSVideo, updateGSPdf, updateGSSocialOrg };
+const updateGSSocialService = async (req, res) => {
+    const { id, service } = req.body;
+    console.log("Updating Social Service: ", id);
+    try {
+        let response = await GSSocialService.updateOne({ _id: id }, { ...service });
+        if (response.modifiedCount === 1) {
+            res.status(200).json({ msg: "Social Service updated successfully." })
+        } else {
+            res.status(203).json({ msg: "Error updating Social Service." })
+        }
+    } catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" })
+    }
+}
+
+module.exports = { updateBlog, updateArticle, updateVideo, updateGSArticle, updateGSBlog, updateGSVideo, updateGSPdf, updateGSSocialOrg, updateGSSocialService };
 
 

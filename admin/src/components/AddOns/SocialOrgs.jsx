@@ -81,10 +81,10 @@ function ListOrgs() {
                     </p>
                     <div  className='flex flex-col '>
                     {orgs.map((org, index) => (
-                        <div key={org._id} className='flex justify-around w-[100vw] p-2 gap-1 md:px-14'>
+                        <div key={org._id} className='flex justify-around w-[100vw] p-2 gap-1 md:px-14 border'>
                             <p className='font-bold pr-3 flex'>{index + 1}</p>
                             <h2 className='w-full font-semibold'>{org.name}</h2>
-                            <FaEdit color='green' className='cursor-pointer' size={23} onClick={()=>navigate('/edit-org/'+org._id)} />
+                            <FaEdit color='green' className='cursor-pointer' size={25} onClick={()=>navigate('/edit-org/'+org._id)} />
                             <MdDeleteForever color='red' size={25} className='cursor-pointer'
                             onClick={() => deleteOrg(org._id, org.name)}
                             />
