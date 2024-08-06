@@ -24,7 +24,7 @@ const AddArticle = () => {
                 resolve(reader.result);
             };
             reader.onerror = reject;
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(compressedFile);
         });
     };
 

@@ -6,6 +6,7 @@ const GSArticles = require('../models/gs/GSArticle.js')
 const GSVideos = require('../models/gs/GSVideos.js');
 const GSPdfs = require('../models/gs/GSPdfs.js');
 const compressImage = require("../utils/compressImage.js");
+const GSSocialOrg = require("../models/gs/GSSocialOrg.js");
 
 const createBlog = async (req, res) => {
     try {
@@ -122,4 +123,19 @@ const createGSVideo = async (req, res) => {
     }
 }
 
-module.exports = { createBlog, createArticle, createVideo, createGSBlog, createGSArticle, createGSVideo, createGSPdf };
+const createGSSocialOrg = async (req, res) => {
+    try {
+        const response = await GSSocialOrg.create({ ...req.body })
+        if (response) {
+            console.log("Created Social Org : ", response._id);
+            res.status(200).json({ msg: "SocialOrg created successfully.", SocialOrg: response._id });
+        } else {
+            console.log("Error creating Social Org.");
+            res.status(203).json({ msg: "Error creating Social Org." });
+        }
+    } catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
+module.exports = { createBlog, createArticle, createVideo, createGSBlog, createGSArticle, createGSVideo, createGSPdf, createGSSocialOrg };

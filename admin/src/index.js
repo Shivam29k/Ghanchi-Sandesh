@@ -17,6 +17,9 @@ import EditVideo from './screens/EditVideo.jsx';
 import Pdfs from './screens/Pdfs.jsx'
 import AddPdf from './screens/AddPdf.jsx'
 import EditPdf from './screens/EditPdf.jsx'
+import AddOns from './screens/AddOns.jsx';
+import EditOrg from './components/AddOns/EditOrg.jsx';
+import AddOrg from './components/AddOns/AddOrg.jsx';
 
 const router = createBrowserRouter([
   {
@@ -67,6 +70,18 @@ const router = createBrowserRouter([
   {
     path: '/edit-pdf/:id',
     element: <EditPdf />
+  },
+  {
+    path: '/add-ons',
+    element: <AddOns />
+  },
+  {
+    path: '/edit-org/:id',
+    element: <EditOrg />
+  },
+  {
+    path: '/add-org',
+    element: <AddOrg />
   }
 ])
 

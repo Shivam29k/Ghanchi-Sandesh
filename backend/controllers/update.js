@@ -4,7 +4,8 @@ const Videos = require("../models/Videos.js")
 const GSBlogs = require('../models/gs/GSBlogs.js')
 const GSArticles = require('../models/gs/GSArticle.js')
 const GSVideos = require('../models/gs/GSVideos.js');
-const GSPdfs = require('../models/gs/GSPdfs.js')
+const GSPdfs = require('../models/gs/GSPdfs.js');
+const GSSocialOrg = require("../models/gs/GSSocialOrg.js");
 
 
 const updateBlog = async (req, res) => {
@@ -123,6 +124,22 @@ const updateGSVideo = async (req, res) => {
         res.status(500).json({ msg: "Internal Server Error" })
     }
 }
-module.exports = { updateBlog, updateArticle, updateVideo, updateGSArticle, updateGSBlog, updateGSVideo, updateGSPdf };
+
+const updateGSSocialOrg = async (req, res) => {
+    const { id, org } = req.body;
+    console.log("Updating Social Org: ", id);
+    try {
+        let response = await GSSocialOrg.updateOne({ _id: id }, { ...org });
+        if (response.modifiedCount === 1) {
+            res.status(200).json({ msg: "Social Org updated successfully." })
+        } else {
+            res.status(203).json({ msg: "Error updating Social Org." })
+        }
+    }catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" })
+    }
+}
+
+module.exports = { updateBlog, updateArticle, updateVideo, updateGSArticle, updateGSBlog, updateGSVideo, updateGSPdf, updateGSSocialOrg };
 
 

@@ -4,7 +4,8 @@ const Videos = require("../models/Videos.js");
 const GSBlogs = require('../models/gs/GSBlogs.js')
 const GSArticles = require('../models/gs/GSArticle.js')
 const GSVideos = require('../models/gs/GSVideos.js');
-const GSPdfs = require('../models/gs/GSPdfs.js')
+const GSPdfs = require('../models/gs/GSPdfs.js');
+const GSSocialOrg = require("../models/gs/GSSocialOrg.js");
 
 
 const getAllPosts = async (req, res) => {
@@ -356,4 +357,33 @@ const getAllGSVideos = async (req, res) => {
     }
 }
 
-module.exports = { getBlog, getBlogsByPage, getAllPosts, getArticle, getAllArticles, getAllVideos, getVideo, getAllPostSlugs, getAllGSPosts, getGSBlog, getGSArticle, getAllGSArticles, getGSVideo, getAllGSVideos, getAllGSPostSlugs, getAllGSArticleSlugs, getGSBlogCards, getAllGSPdfs, getGSPdf, getAllGSPdfsTitle, getGSBlogCardsByPages };
+const getGSSocialOrg = async (req, res) => {
+    const { id } = req.body;
+    try {
+        let response = await GSSocialOrg.findOne({ _id: id })
+        if (response) {
+            res.status(200).json({ response });
+        } else {
+            res.status(203).json({ msg: "Unable to fetch data." });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
+const getAllGSSocialOrgsName = async (req, res) => {
+    console.log("Fetching all social orgs name");
+    try {
+        let response = await GSSocialOrg.find({}).select('name');
+        let reversedRes = response.reverse();
+
+        res.status(200).json(reversedRes);
+    } catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
+
+
+module.exports = { getBlog, getBlogsByPage, getAllPosts, getArticle, getAllArticles, getAllVideos, getVideo, getAllPostSlugs, getAllGSPosts, getGSBlog, getGSArticle, getAllGSArticles, getGSVideo, getAllGSVideos, getAllGSPostSlugs, getAllGSArticleSlugs, getGSBlogCards, getAllGSPdfs, getGSPdf, getAllGSPdfsTitle, getGSBlogCardsByPages, getAllGSSocialOrgsName, getGSSocialOrg };

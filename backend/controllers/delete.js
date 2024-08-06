@@ -4,7 +4,8 @@ const Videos = require("../models/Videos.js");
 const GSBlogs = require('../models/gs/GSBlogs.js')
 const GSArticles = require('../models/gs/GSArticle.js')
 const GSVideos = require('../models/gs/GSVideos.js');
-const GSPdfs = require('../models/gs/GSPdfs.js')
+const GSPdfs = require('../models/gs/GSPdfs.js');
+const GSSocialOrg = require("../models/gs/GSSocialOrg.js");
 
 
 const deleteBlog = async (req, res) => {
@@ -115,4 +116,19 @@ const deleteGSVideo = async (req, res) => {
     }
 }
 
-module.exports = { deleteBlog, deleteArticle, deleteVideo, deleteGSArticle, deleteGSBlog, deleteGSVideo, deleteGSPdf };
+const deleteGSSocialOrg = async (req, res) => {
+    const { id } = req.body;
+    try {
+        let response = await GSSocialOrg.deleteOne({ _id: id });
+        if (response.deletedCount === 1) {
+            res.status(200).json({ msg: "Social Organization deleted successfully." })
+        } else {
+            res.status(203).json({ msg: "Error deleting social organization." })
+        }
+    }
+    catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" })
+    }
+}
+
+module.exports = { deleteBlog, deleteArticle, deleteVideo, deleteGSArticle, deleteGSBlog, deleteGSVideo, deleteGSPdf, deleteGSSocialOrg };

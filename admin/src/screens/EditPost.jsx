@@ -23,7 +23,7 @@ const EditPost = () => {
             const reader = new FileReader();
             reader.onloadend = () => resolve(reader.result);
             reader.onerror = reject;
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(compressedFile);
         });
     };
 

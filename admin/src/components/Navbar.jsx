@@ -33,6 +33,12 @@ const Navbar = ({ blogTo, blogTitle, articleTo, articleTitle, videoTo, videoTitl
                         {pdfTitle}
                     </span>
                 </NavLink>
+                <NavLink className='px-2 py-[1px] bg-white flex justify-center items-center gap-1 rounded h-fit flex-nowrap' to={'/add-ons'} >
+                    <span className='text-[#e51a4b] text-sm font-bold'>
+                        Add Ons
+                    </span>
+                </NavLink>
+
             </div>
         </nav>
     );
