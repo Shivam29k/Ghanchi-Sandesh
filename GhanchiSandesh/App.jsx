@@ -17,6 +17,7 @@ import PdfReader from './src/screens/pdfs/PdfReader';
 import Article from './src/screens/articles/Article';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import AddOns from './src/screens/addOns/AddOns';
 
 
 const Stack = createStackNavigator();
@@ -71,6 +72,28 @@ function DrawerContent(props) {
           fontWeight: 'bold',
           letterSpacing: 2
         }}>HOME</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Blogs')}>
+        <Text style={{
+          color: 'white',
+          textDecorationLine: 'underline',
+          fontSize: 16,
+          marginVertical: 10,
+          fontWeight: 'bold',
+          letterSpacing: 2
+        }}>सामाजिक सेवाएं</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Blogs')}>
+        <Text style={{
+          color: 'white',
+          textDecorationLine: 'underline',
+          fontSize: 16,
+          marginVertical: 10,
+          fontWeight: 'bold',
+          letterSpacing: 2
+        }}>सामाजिक संस्थाएँ</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('About')}>
@@ -229,6 +252,12 @@ function MainTabNavigator() {
           tabBarVisible: false,
         })}
       />
+      <Tab.Screen name="AddOns" component={AddOns}
+        options={() => ({
+          tabBarIcon: ({ focused }) => (
+            <Icon name={focused ? "puzzle" : "puzzle-outline"} color={focused ? '#e51a4b' : 'black'} size={30} />
+          )
+        })} />
     </Tab.Navigator>
 
   );
