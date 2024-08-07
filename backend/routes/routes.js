@@ -60,7 +60,10 @@ const {
     getAllGSSocialOrgsName,
     getGSSocialOrg,
     getAllGSSocialSrviceName,
-    getGSSocialService
+    getGSSocialService,
+    getAllGSSocialOrgsNameLogo,
+    getGSSocialOrgData,
+    getGSSocialOrgImages
 } = require('../controllers/fetch.js')
 
 const {
@@ -121,6 +124,9 @@ routes
     .delete('/delete-gs-social-org', deleteGSSocialOrg)
     .get('/get-all-gs-social-orgs-name', getAllGSSocialOrgsName)
     .post('/get-gs-social-org', getGSSocialOrg)
+    .get('/get-all-gs-social-orgs-name-logo', getAllGSSocialOrgsNameLogo)
+    .post('/get-gs-social-org-data', getGSSocialOrgData)
+    .post('/get-all-gs-social-org-images', getGSSocialOrgImages)
 
     // Social Services Routes
     .post('/create-gs-social-service', createGSSocialService)

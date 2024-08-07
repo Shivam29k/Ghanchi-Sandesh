@@ -412,4 +412,51 @@ const getAllGSSocialSrviceName = async (req, res) => {
     }
 }
 
-module.exports = { getBlog, getBlogsByPage, getAllPosts, getArticle, getAllArticles, getAllVideos, getVideo, getAllPostSlugs, getAllGSPosts, getGSBlog, getGSArticle, getAllGSArticles, getGSVideo, getAllGSVideos, getAllGSPostSlugs, getAllGSArticleSlugs, getGSBlogCards, getAllGSPdfs, getGSPdf, getAllGSPdfsTitle, getGSBlogCardsByPages, getAllGSSocialOrgsName, getGSSocialOrg, getAllGSSocialSrviceName, getGSSocialService };
+// get all social orgs with name and logo
+const getAllGSSocialOrgsNameLogo = async (req, res) => {
+    console.log("Fetching all social orgs name and logo");
+    try {
+        let response = await GSSocialOrg.find({}).select('name logo');
+        let reversedRes = response.reverse();
+
+        res.status(200).json(reversedRes);
+    } catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
+// get social org data except images
+const getGSSocialOrgData = async (req, res) => {
+    const { id } = req.body;
+    try {
+        let response = await GSSocialOrg.findOne({ _id: id }).select('-images')
+        if (response) {
+            res.status(200).json({ response });
+        } else {
+            res.status(203).json({ msg: "Unable to fetch data." });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
+// get images of a social org
+const getGSSocialOrgImages = async (req, res) => {
+    const { id } = req.body;
+    try {
+        let response = await GSSocialOrg.findOne({ _id: id }).select('images')
+        if (response) {
+            res.status(200).json({ response });
+        } else {
+            res.status(203).json({ msg: "Unable to fetch data." });
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
+
+
+module.exports = { getBlog, getBlogsByPage, getAllPosts, getArticle, getAllArticles, getAllVideos, getVideo, getAllPostSlugs, getAllGSPosts, getGSBlog, getGSArticle, getAllGSArticles, getGSVideo, getAllGSVideos, getAllGSPostSlugs, getAllGSArticleSlugs, getGSBlogCards, getAllGSPdfs, getGSPdf, getAllGSPdfsTitle, getGSBlogCardsByPages, getAllGSSocialOrgsName, getGSSocialOrg, getAllGSSocialSrviceName, getGSSocialService, getAllGSSocialOrgsNameLogo, getGSSocialOrgData, getGSSocialOrgImages };
