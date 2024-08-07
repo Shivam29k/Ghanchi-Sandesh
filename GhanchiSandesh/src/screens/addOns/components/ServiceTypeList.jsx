@@ -21,7 +21,7 @@ const ServiceItem = ({ item }) => (
     </View>
 );
 
-const ServiceTypeList = ({ type, onBack }) => {
+const ServiceTypeList = ({ type }) => {
     const [services, setServices] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
 

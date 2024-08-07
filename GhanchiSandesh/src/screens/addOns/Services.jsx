@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, BackHandler } from 'react-native';
 import ServiceTypeList from './components/ServiceTypeList';
 
 import hallImage from './images/hall.png';
@@ -41,19 +41,30 @@ const ServiceItem = ({ title, image, onPress }) => (
 );
 
 const Services = () => {
-    const [selectedType, setSelectedType] = useState(null);
-  
-    const handleServicePress = (type) => {
-      setSelectedType(type);
+  const [selectedType, setSelectedType] = useState(null);
+
+  useEffect(() => {
+    const backAction = () => {
+      if (selectedType) {
+        setSelectedType(null);
+        return true; // Prevents default back action
+      }
+      return false; // Allows default back action
     };
-  
-    const handleBack = () => {
-      setSelectedType(null);
-    };
-  
-    if (selectedType) {
-      return <ServiceTypeList type={types[selectedType]} onBack={handleBack} />;
-    }
+
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove(); // Cleanup the event listener
+  }, [selectedType]);
+
+  const handleServicePress = (type) => {
+    setSelectedType(type);
+  };
+
+
+  if (selectedType) {
+    return <ServiceTypeList type={types[selectedType]} />;
+  }
 
   return (
     <View style={styles.container}>
