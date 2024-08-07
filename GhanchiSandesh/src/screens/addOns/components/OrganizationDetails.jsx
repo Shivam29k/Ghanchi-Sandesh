@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, BackHandler } from 'react-native';
 
-const OrganizationDetails = ({ orgId }) => {
+const OrganizationDetails = ({ orgId, onBack }) => {
   const [org, setOrg] = useState(null);
   const [images, setImages] = useState([]);
 

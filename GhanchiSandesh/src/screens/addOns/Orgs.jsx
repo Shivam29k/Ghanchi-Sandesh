@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, RefreshControl } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image, RefreshControl, BackHandler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OrganizationDetails from './components/OrganizationDetails';
 
@@ -7,6 +7,20 @@ const Orgs = () => {
   const [orgData, setOrgData] = useState([]);
   const [selectedOrgId, setSelectedOrgId] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+
+  const handleBack = () => {
+    if (selectedOrgId) {
+      setSelectedOrgId(null);
+      return true; // Prevents default back action
+    }
+    return false; // Allows default back action when on the main list
+  };
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBack);
+
+    return () => backHandler.remove();
+  }, [selectedOrgId]); // Add selectedOrgId as a dependency
 
   const saveDataToStorage = async (data) => {
     try {
@@ -62,7 +76,7 @@ const Orgs = () => {
   return (
     <View style={styles.container}>
       {selectedOrgId ? (
-        <OrganizationDetails orgId={selectedOrgId} />
+        <OrganizationDetails orgId={selectedOrgId} onBack={handleBack} />
       ) : (
         <FlatList
           data={orgData}
