@@ -411,6 +411,18 @@ const getAllGSSocialSrviceName = async (req, res) => {
         res.status(500).json({ msg: "Internal Server Error" });
     }
 }
+// get all social services of a particular type
+const getAllGSSocialSrvicesType = async (req, res) => {
+    const { type } = req.body;
+    try {
+        let response = await GSSocialService.find({ type: type });
+        let reversedRes = response.reverse();
+
+        res.status(200).json(reversedRes);
+    } catch (error) {
+        res.status(500).json({ msg: "Internal Server Error" });
+    }
+}
 
 // get all social orgs with name and logo
 const getAllGSSocialOrgsNameLogo = async (req, res) => {
@@ -459,4 +471,4 @@ const getGSSocialOrgImages = async (req, res) => {
 }
 
 
-module.exports = { getBlog, getBlogsByPage, getAllPosts, getArticle, getAllArticles, getAllVideos, getVideo, getAllPostSlugs, getAllGSPosts, getGSBlog, getGSArticle, getAllGSArticles, getGSVideo, getAllGSVideos, getAllGSPostSlugs, getAllGSArticleSlugs, getGSBlogCards, getAllGSPdfs, getGSPdf, getAllGSPdfsTitle, getGSBlogCardsByPages, getAllGSSocialOrgsName, getGSSocialOrg, getAllGSSocialSrviceName, getGSSocialService, getAllGSSocialOrgsNameLogo, getGSSocialOrgData, getGSSocialOrgImages };
+module.exports = { getBlog, getBlogsByPage, getAllPosts, getArticle, getAllArticles, getAllVideos, getVideo, getAllPostSlugs, getAllGSPosts, getGSBlog, getGSArticle, getAllGSArticles, getGSVideo, getAllGSVideos, getAllGSPostSlugs, getAllGSArticleSlugs, getGSBlogCards, getAllGSPdfs, getGSPdf, getAllGSPdfsTitle, getGSBlogCardsByPages, getAllGSSocialOrgsName, getGSSocialOrg, getAllGSSocialSrviceName, getGSSocialService, getAllGSSocialOrgsNameLogo, getGSSocialOrgData, getGSSocialOrgImages, getAllGSSocialSrvicesType };
